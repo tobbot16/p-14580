@@ -2,6 +2,7 @@ package com.back.domain.member.member.repository
 
 import com.back.domain.member.member.entity.Member
 import com.back.domain.member.member.entity.QMember
+import com.back.domain.member.member.entity.QMember.member
 import com.querydsl.jpa.impl.JPAQueryFactory
 
 //구현
@@ -44,6 +45,17 @@ class MemberRepositoryImpl(
             .selectFrom(member)
             .where(member.username.eq(username)
                 .and(member.nickname.eq(nickname)))
+            .fetchOne()
+    }
+
+    override fun findQByUsernameOrNickname(
+        username: String,
+        nickname: String
+    ): Member? {
+        return jpaQuery
+            .selectFrom(member)
+            .where(member.username.eq(username)
+                .or(member.nickname.eq(nickname)))
             .fetchOne()
     }
 
