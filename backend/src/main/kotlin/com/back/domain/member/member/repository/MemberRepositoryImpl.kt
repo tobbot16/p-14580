@@ -77,4 +77,13 @@ class MemberRepositoryImpl(
             )
             .fetch()
     }
+
+    override fun findQByNicknameContaining(username: String): List<Member> {
+        val member = QMember.member
+        return jpaQuery
+            .selectFrom(member)
+            .where(member.nickname.like("%$username%"))
+            .fetch()
+
+    }
 }

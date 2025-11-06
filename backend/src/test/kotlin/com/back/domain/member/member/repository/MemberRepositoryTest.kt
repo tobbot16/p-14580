@@ -73,7 +73,7 @@ class MemberRepositoryTest {
     @Test
     fun `findCByUsernameAndEitherPasswordOrNickname`() {
         // select * from member where username = ? and (password = ? or nickname = ?)
-        val members = memberRepository.findCByUsernameAndEitherPasswordOrNickname("admin", "wrong-password", "관리자")
+        val members = memberRepository.findCByUsernameAndEitherPasswordOrNickname("admin", "wrong-password", "운영자")
 
         assertThat(members).isNotEmpty
         assertThat(members.any { it.username == "admin" && (it.password == "wrong-password" || it.nickname == "운영자") }).isTrue
@@ -82,9 +82,53 @@ class MemberRepositoryTest {
     @Test
     fun `findQByUsernameAndPasswordOrNickname`() {
         // select * from member where username = ? and (password = ? or nickname = ?)
-        val members = memberRepository.findQByUsernameAndEitherPasswordOrNickname("admin", "wrong-password", "관리자")
+        val members = memberRepository.findQByUsernameAndEitherPasswordOrNickname("admin", "wrong-password", "운영자")
 
         assertThat(members).isNotEmpty
         assertThat(members.any { it.username == "admin" && (it.password == "wrong-password" || it.nickname == "운영자") }).isTrue
     }
+
+    @Test
+    fun `findByNicknameContaining`() {
+        val members = memberRepository.findByNicknameContaining("유저")
+
+        assertThat(members).isNotEmpty
+        assertThat(members.all { it.nickname.contains("유저") }).isTrue
+    }
+
+    @Test
+    fun `findQByNicknameContaining`() {
+        val members = memberRepository.findQByNicknameContaining("유저")
+
+        assertThat(members).isNotEmpty
+        assertThat(members.all { it.nickname.contains("유저") }).isTrue
+    }
+
+//    @Test
+//    fun `countByNicknameContaining`() {
+//        val count = memberRepository.countByNicknameContaining("유저")
+//
+//        assertThat(count).isEqualTo(3)
+//    }
+//
+//    @Test
+//    fun `countQByNicknameContaining`() {
+//        val count = memberRepository.countQByNicknameContaining("유저")
+//
+//        assertThat(count).isEqualTo(3)
+//    }
+//
+//    @Test
+//    fun `existsByNicknameContaining`() {
+//        val exists = memberRepository.existsByNicknameContaining("유저")
+//
+//        assertThat(exists).isTrue
+//    }
+//
+//    @Test
+//    fun `existsQByNicknameContaining`() {
+//        val exists = memberRepository.existsQByNicknameContaining("유저")
+//
+//        assertThat(exists).isTrue
+//    }
 }
