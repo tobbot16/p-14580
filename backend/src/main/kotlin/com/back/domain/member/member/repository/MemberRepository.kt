@@ -7,4 +7,5 @@ interface MemberRepository : JpaRepository<Member, Long>, MemberRepositoryCustom
 
     fun findByUsername(username: String): Member?
     fun findByApiKey(apiKey: String): Member?
+    fun findByIdIn(ids: List<Long>):List<Member>
 }
