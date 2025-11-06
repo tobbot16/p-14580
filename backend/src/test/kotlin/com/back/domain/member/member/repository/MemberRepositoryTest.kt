@@ -69,4 +69,22 @@ class MemberRepositoryTest {
         val memberList = memberRepository.findByUsernameOrNickname("user1", "유저2")
         assertThat(memberList.map { it.username }).containsAnyOf("user1", "user2")
     }
+
+    @Test
+    fun `findCByUsernameAndEitherPasswordOrNickname`() {
+        // select * from member where username = ? and (password = ? or nickname = ?)
+        val members = memberRepository.findCByUsernameAndEitherPasswordOrNickname("admin", "wrong-password", "관리자")
+
+        assertThat(members).isNotEmpty
+        assertThat(members.any { it.username == "admin" && (it.password == "wrong-password" || it.nickname == "운영자") }).isTrue
+    }
+
+    @Test
+    fun `findQByUsernameAndPasswordOrNickname`() {
+        // select * from member where username = ? and (password = ? or nickname = ?)
+        val members = memberRepository.findQByUsernameAndEitherPasswordOrNickname("admin", "wrong-password", "관리자")
+
+        assertThat(members).isNotEmpty
+        assertThat(members.any { it.username == "admin" && (it.password == "wrong-password" || it.nickname == "운영자") }).isTrue
+    }
 }
