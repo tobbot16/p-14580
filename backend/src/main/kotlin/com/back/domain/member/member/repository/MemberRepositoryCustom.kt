@@ -9,7 +9,7 @@ interface MemberRepositoryCustom {
     fun findQByUsername(username : String) : Member?
     fun findQByIdIn(ids: List<Long>): List<Member>
     fun findQByUsernameAndNickname(username : String, nickname : String) : Member?
-    fun findQByUsernameOrNickname(username : String, nickname : String) : Member?
+    fun findQByUsernameOrNickname(username : String, nickname : String) : List<Member>
 
 
 }

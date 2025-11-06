@@ -51,12 +51,12 @@ class MemberRepositoryImpl(
     override fun findQByUsernameOrNickname(
         username: String,
         nickname: String
-    ): Member? {
+    ): List<Member> {
         return jpaQuery
             .selectFrom(member)
             .where(member.username.eq(username)
                 .or(member.nickname.eq(nickname)))
-            .fetchOne()
+            .fetch()
     }
 
 }
