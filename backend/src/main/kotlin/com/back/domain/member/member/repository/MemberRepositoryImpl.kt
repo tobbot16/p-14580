@@ -17,4 +17,13 @@ class MemberRepositoryImpl(
             .fetchOne()//단건조회
     }
 
+    override fun findQByUsername(username: String): Member? {
+        val member = QMember.member
+        return jpaQuery
+            .select(member)
+            .from(member)
+            .where(member.username.eq(username))
+            .fetchOne()//단건조회
+    }
+
 }
