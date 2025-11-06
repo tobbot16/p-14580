@@ -5,6 +5,7 @@ plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
     kotlin("plugin.jpa") version "1.9.25"
+    kotlin("kapt") version "1.9.25"
 }
 
 group = "com"
@@ -49,6 +50,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    implementation("io.github.openfeign.querydsl:querydsl-jpa:7.1")
+    kapt("io.github.openfeign.querydsl:querydsl-apt:7.1:jpa")
 }
 
 kotlin {
