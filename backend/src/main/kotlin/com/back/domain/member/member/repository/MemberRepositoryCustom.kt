@@ -1,6 +1,8 @@
 package com.back.domain.member.member.repository
 
 import com.back.domain.member.member.entity.Member
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 
 //쿼리dsl 추가
 interface MemberRepositoryCustom {
@@ -14,4 +16,6 @@ interface MemberRepositoryCustom {
     fun findQByNicknameContaining(username: String): List<Member>
     fun countQByNicknameContaining(nickname: String): Long
     fun existsQByNicknameContaining(nickname: String): Boolean
+    fun findQByNicknameContaining(nickname : String, pageable: Pageable): Page<Member>
+
 }
