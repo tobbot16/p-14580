@@ -19,6 +19,7 @@ interface MemberRepository : JpaRepository<Member, Long>, MemberRepositoryCustom
     fun countByNicknameContaining(nickname: String): Long
     fun existsByNicknameContaining(nickname: String): Boolean
     fun findByNicknameContaining(nickname : String, pageable: Pageable): Page<Member>
+    fun findByNicknameContainingOrderByIdDesc(nickname : String): List<Member>
 
 
 
